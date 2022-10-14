@@ -1,14 +1,19 @@
-import Home from "./pages/Home";
+import { useState, useEffect } from "react";
+import PokemonCard from "./components/PokemonCard";
 
 import "./App.css";
 
 import pokemonList from "./data/pokemonList";
 
-import PokemonCard from "@components/PokemonCard";
-import { useState } from "react";
-
 function App() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setCurrentIndex((currentIndex + 1) % pokemonList.length);
+    }, 1000);
+
+    return () => clearTimeout(timeout);
+  }, [currentIndex]);
 
   return (
     <div className="App">
